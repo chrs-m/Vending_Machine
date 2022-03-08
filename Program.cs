@@ -1,6 +1,6 @@
 ﻿var vendingMachine = new VendingMachine();
 Customer newCustomer = new Customer();
-newCustomer.moneyOwned = newCustomer.GetRandomAmount(20.0, 200.0);
+newCustomer.moneyOwned = newCustomer.GetRandomAmount(5.0, 100.0);
 
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("\n**** Vending machine 1.0 ****");
@@ -48,6 +48,7 @@ while (true)
                     vendingMachine.DrinksMenu();
                     Console.WriteLine("9. Go back.");
                     var drinkChoice = Console.ReadLine();
+                    var drinkItem = VendingMachine.BuyDrink(drinkChoice,  newCustomer.moneyOwned);
 
                     if (drinkChoice == "9")
                     {
