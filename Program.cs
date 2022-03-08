@@ -2,14 +2,10 @@
 Customer newCustomer = new Customer();
 newCustomer.moneyOwned = newCustomer.GetRandomAmount(20.0, 200.0);
 
-
-Console.WriteLine($"The customer has {newCustomer.moneyOwned}kr to spend.");
-
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("\n**** Vending machine 1.0 ****");
 Console.ResetColor();
 Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine($"You have {newCustomer.moneyOwned}kr in your wallet.\n");
 
 
 while (true)
@@ -19,6 +15,8 @@ while (true)
 
     Console.ResetColor();
     Console.WriteLine("1. Snacks & Drinks");
+    Console.WriteLine("2. Check amount");
+    Console.WriteLine("3. See receipt");
     Console.WriteLine("9. Exit");
 
 
@@ -27,6 +25,7 @@ while (true)
     switch (input)
     {
         case "1":
+            Console.Clear();
             Console.Clear();
             while (true)
             {
@@ -53,6 +52,7 @@ while (true)
                     if (drinkChoice == "9")
                     {
                         Console.Clear();
+                        Console.Clear();
                         continue;
                     }
 
@@ -69,11 +69,13 @@ while (true)
                     if (answer == "1")
                     {
                         Console.Clear();
+                        Console.Clear();
                         continue;
                     }
 
                     if (answer == "2")
                     {
+                        Console.Clear();
                         Console.Clear();
                         break;
                     }
@@ -93,6 +95,7 @@ while (true)
                     if (snacksChoice == "9")
                     {
                         Console.Clear();
+                        Console.Clear();
                         continue;
                     }
 
@@ -109,11 +112,13 @@ while (true)
                     if (answer == "1")
                     {
                         Console.Clear();
+                        Console.Clear();
                         continue;
                     }
 
                     if (answer == "2")
                     {
+                        Console.Clear();
                         Console.Clear();
                         break;
                     }
@@ -121,7 +126,34 @@ while (true)
             }
             break;
 
+        case "2":
+            if (newCustomer.moneyOwned == 0)
+            {
+                Console.Clear();
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYour wallet is empty.");
+                Console.ResetColor();
+                continue;
+            }
+
+            Console.Clear();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nYou currently have {newCustomer.moneyOwned}kr for your disposal.");
+            Console.ResetColor();
+            continue;
+
+        case "3":
+            Console.Clear();
+            Console.Clear();
+            newCustomer.CheckReceipt();
+            continue;
+
         case "9":
+            Console.Clear();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Good bye!");
             break;
     }
