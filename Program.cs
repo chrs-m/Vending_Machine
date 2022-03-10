@@ -1,4 +1,4 @@
-﻿void snacksAndStuff(VendingMachine vendingMachine, Customer newCustomer)
+﻿void snacksAndDrinks(VendingMachine vendingMachine, Customer newCustomer)
 {
 
     Console.Clear();
@@ -16,6 +16,13 @@
 
         var menuInput = Console.ReadLine();
 
+        if (menuInput == "9")
+        {
+            Console.Clear();
+            return;
+
+        }
+
         if (menuInput == "1")
         {
             Console.Clear();
@@ -25,7 +32,7 @@
             vendingMachine.DrinksMenu();
             Console.WriteLine("9. Go back.");
             var drinkChoice = Console.ReadLine();
-            var drinkItem = vendingMachine.BuyDrink(drinkChoice, newCustomer.moneyOwned);
+            var drinkItem = vendingMachine.BuyDrink(drinkChoice, newCustomer);
 
             if (drinkChoice == "9")
             {
@@ -63,10 +70,10 @@
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\n**** SNACKS ****");
             Console.ResetColor();
-
             vendingMachine.SnacksMenu();
             Console.WriteLine("9. Go back");
             var snacksChoice = Console.ReadLine();
+            var snackItem = vendingMachine.BuySnacks(snacksChoice, newCustomer);
 
             if (snacksChoice == "9")
             {
@@ -102,15 +109,15 @@
 
 var vendingMachine = new VendingMachine();
 Customer newCustomer = new Customer();
-newCustomer.moneyOwned = newCustomer.GetRandomAmount(5.0, 100.0);
+newCustomer.moneyOwned = newCustomer.GetRandomAmount(15.0, 100.0);
 
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine("\n**** Vending machine 1.0 ****");
 Console.ResetColor();
 Console.ForegroundColor = ConsoleColor.Green;
 
-
-while (true)
+var exitByChoice = false;
+while (!exitByChoice)
 {
     Console.ForegroundColor = ConsoleColor.DarkCyan;
     Console.WriteLine("\n***** PLEASE CHOOSE A NUMBER BELOW ***** ");
@@ -127,8 +134,7 @@ while (true)
     switch (input)
     {
         case "1":
- //           vendingMachine.sanaksandstuff(newcustomer);
-            snacksAndStuff(vendingMachine, newCustomer);
+            snacksAndDrinks(vendingMachine, newCustomer);
             break;
 
         case "2":
@@ -156,6 +162,8 @@ while (true)
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Good bye!");
+            exitByChoice = true;
             break;
     }
+   
 }

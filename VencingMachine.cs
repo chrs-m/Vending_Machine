@@ -36,7 +36,7 @@
         }
     }
 
-    public Drinks BuyDrink(string input, double money)
+    public Drinks BuyDrink(string input, Customer customer)
     {
         int.TryParse(input, out int number);
 
@@ -47,7 +47,7 @@
 
         var selectedDrink = DrinkList[number - 1];
 
-        if (selectedDrink.Price > money)
+        if (selectedDrink.Price > customer.moneyOwned)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -56,11 +56,46 @@
             return null;
         }
 
+
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"\nYou have selected {selectedDrink.Name}, that'll be {selectedDrink.Price}kr.");
+        Console.WriteLine($"\nThis will be added to your receipt.");
         Console.ResetColor();
+        customer.moneyOwned -= selectedDrink.Price;
+        customer.drinksCart.Add(selectedDrink);
         return selectedDrink;
+    }
+
+    public Snacks BuySnacks(string input, Customer customer)
+    {
+        int.TryParse(input, out int number);
+
+        if (number > 5 || number < 1)
+        {
+            return null;
+        }
+
+        var selectedSnacks = SnackList[number - 1];
+
+        if (selectedSnacks.Price > customer.moneyOwned)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nYou don't have enough money to buy this.");
+            Console.ResetColor();
+            return null;
+        }
+
+
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"\nYou have selected {selectedSnacks.Name}, that'll be {selectedSnacks.Price}kr.");
+        Console.WriteLine($"\nThis will be added to your receipt.");
+        Console.ResetColor();
+        customer.moneyOwned -= selectedSnacks.Price;
+        customer.snacksCart.Add(selectedSnacks);
+        return selectedSnacks;
     }
 
 }
