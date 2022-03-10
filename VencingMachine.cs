@@ -16,7 +16,6 @@
             new Snacks("Refreshers (5 pack)", 10),
             new Snacks("Flipper", 8),
             new Snacks("Snickers", 10),
-
         };
 
     public void DrinksMenu()
@@ -27,6 +26,7 @@
             Console.WriteLine($"{index++}. {item.Name}, {item.Price} SEK.");
         }
     }
+
     public void SnacksMenu()
     {
         var index = 1;
@@ -36,7 +36,7 @@
         }
     }
 
-    public Drinks BuyDrink(string input, int money)
+    public Drinks BuyDrink(string input, double money)
     {
         int.TryParse(input, out int number);
 
@@ -62,4 +62,5 @@
         Console.ResetColor();
         return selectedDrink;
     }
+
 }
